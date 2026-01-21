@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/run_tests.dir/tests/test_transpilation.cpp.o -o run_tests  libtptc_lib.a
