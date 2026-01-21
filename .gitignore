@@ -1,0 +1,19 @@
+# Archivos de compilación de CMake
+build/
+**/build/
+
+# Archivos de configuración del IDE
+.vscode/
+.idea/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Binarios y ejecutables
+*.exe
+*.out
+*.dll
+*.so
+*.a
+*.lib
