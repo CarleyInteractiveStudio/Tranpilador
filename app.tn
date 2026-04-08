@@ -1,10 +1,23 @@
 <html>
-  <button id="btn1" onclick="cambiarTexto()">Haz click</button>
-  <p id="txt1">Texto original</p>
+  <button id="btn1" onclick="mejorarApp()">Mejorar Diseño</button>
+  <p id="txt1">Contador: 0</p>
 </html>
 
+<style>
+#btn1 {
+  background-color: #4CAF50;
+}
+#txt1 {
+  background-color: #f1f1f1;
+}
+</style>
+
 <script>
-function cambiarTexto() {
-  document.getElementById('txt1').innerText = '¡Texto cambiado!'
+let clicks = 0;
+function mejorarApp() {
+  clicks = clicks + 1;
+  document.getElementById('txt1').innerText = 'Has pulsado el boton'
+  document.getElementById('txt1').style.backgroundColor = '#2196F3'
+  document.getElementById('btn1').style.backgroundColor = '#FF9800'
 }
 </script>
