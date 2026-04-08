@@ -1,15 +1,13 @@
 <html>
-  <input id="userName" value="Jules">
-  <button id="saveBtn" onclick="guardarProgreso()">Guardar en Storage</button>
-  <p id="status">Esperando accion...</p>
+  <p id="txt1">Contador: 0</p>
+  <button id="btn1" onclick="incrementar()">Sumar</button>
 </html>
-
 <script>
-function guardarProgreso() {
-  let nombre = 'Usuario';
-  console.log('Guardando...');
-  // Esto seria evaluado por QuickJS
-  storage.set('user', nombre);
-  document.getElementById('status').innerText = 'Progreso Guardado con exito'
+let clicks = 0;
+let uno = 1;
+function incrementar() {
+  clicks = clicks + uno;
+  console.log(clicks);
+  document.getElementById('txt1').innerText = clicks;
 }
 </script>
