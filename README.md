@@ -1,19 +1,16 @@
-# TPTC - Transpilador de Código Nativo Pro (v1.0)
+# TPTC - Transpilador de Código Nativo Pro (v2.0)
 
-Este es el sistema definitivo para convertir aplicaciones web (HTML/JS/CSS) en binarios nativos puros de alto rendimiento, traduciendo JavaScript directamente a código C.
+Esta versión introduce la integración con parsers profesionales de HTML/CSS, permitiendo convertir sitios web completos y complejos en aplicaciones nativas puras.
 
-## Hito v1.0: Compilación Real JS-a-C
-- **Cero Intérpretes:** JS ya no se interpreta, se **compila** a instrucciones C imperativas.
-- **Runtime en C:** Librería de tiempo de ejecución de JS implementada en C (`js_runtime.h/c`) con soporte para tipos dinámicos.
-- **Rendimiento Extremo:** Al eliminar el motor de JS en tiempo de ejecución, las apps son más ligeras y rápidas.
-- **Librerías del Navegador:** Simulación nativa de `console`, `document` y manipulación del DOM en C.
+## Novedades v2.0: El "Navegador Nativo"
+- **Parser Profesional (Lexbor):** Integración de un motor de análisis de alto rendimiento que captura el DOM y CSSOM completos.
+- **Soporte de Estilos Expandido:** Soporte para clases CSS, transformaciones, bordes complejos y resolución de la cascada.
+- **API DOM Nativa:** Funciones en C para interactuar con el DOM (`querySelector`, `animate`) integradas con el compilador de JS.
+- **Cero Errores en Proyectos Grandes:** Gracias al análisis profesional de HTML5/CSS3, la fidelidad de la transpilación es máxima.
 
-## Arquitectura
-- `engine/`: Motor gráfico y Runtime de JS en C.
-- `compiler/`: El compilador de JS-a-C que genera el código fuente final.
-- `hub/` & `editor/`: Herramientas visuales de desarrollo.
+## Arquitectura Avanzada
+- `engine/`: Motor gráfico v2.0 con soporte para transformaciones y DOM API.
+- `compiler/parser_pro.c`: Nuevo núcleo de transpilación profesional.
 
-## Uso
-1. `make` para construir las herramientas.
-2. `./bin/tptc app.tn app.c` para compilar tu app web a C.
-3. Usa TCC para generar el ejecutable final: `tcc app.c ... -o app.exe`.
+## Cómo usar
+El sistema ahora detecta automáticamente la complejidad del proyecto y utiliza el motor de análisis profesional para asegurar que cada etiqueta y estilo se convierta exactamente a su equivalente en C nativo.
