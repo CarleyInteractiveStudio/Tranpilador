@@ -1,24 +1,19 @@
-# TPTC - Transpilador de Código Nativo Pro (v0.2)
+# TPTC - Transpilador de Código Nativo Pro (v0.5)
 
-Este sistema convierte aplicaciones web (HTML/JS) en binarios nativos de alto rendimiento.
+Este sistema convierte aplicaciones web (HTML/JS/CSS) en binarios nativos de alto rendimiento.
 
-## Novedades v0.2
-- **Interfaz Gráfica (IDE):** Editor visual basado en Dear ImGui para desarrollo interactivo.
-- **Motor Gráfico OpenGL:** Soporte para renderizado nativo y acelerado.
-- **Transpilador Inteligente:** Ahora soporta eventos `onclick` y una gestión de estados más robusta.
-- **Interacción Real:** El código generado ahora soporta lógica interactiva (JS -> C).
+## Novedades v0.5
+- **Flexbox Layout:** Motor nativo con soporte para `display: flex` y `flex-direction`.
+- **Soporte de Red:** Nueva API nativa para `fetch()`, permitiendo conectar las apps a internet.
+- **Preparación Android:** Estructura base de proyecto JNI para exportación a APK.
+- **Transpilador v2:** Parser mejorado para manejar divs, botones y lógica de red.
 
 ## Componentes
-- `hub/`: Lanzador de aplicaciones con interfaz gráfica.
-- `editor/`: IDE visual con editor de código y botones de exportación.
-- `engine/`: Motor nativo en C con GC y soporte OpenGL.
-- `compiler/`: Transpilador de `.tn` a `.c`.
-
-## Requisitos
-- `gcc`, `g++`, `make`
-- Librerías: `glfw`, `OpenGL`
+- `android_project/`: Estructura base para empaquetado móvil.
+- `engine/`: Motor C con soporte Flexbox y Networking.
+- `compiler/`: Transpilador avanzado con soporte para APIs web modernas.
 
 ## Uso
 1. Ejecuta `make` para construir el IDE.
-2. Abre el Hub: `./bin/hub_gui`.
-3. Exporta tu app nativa desde el editor.
+2. Escribe una app con Flexbox y Fetch.
+3. Exporta a Nativo o prepara tu proyecto para Android.
