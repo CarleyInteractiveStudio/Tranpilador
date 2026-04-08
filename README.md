@@ -1,19 +1,19 @@
-# TPTC - Transpilador de Código Nativo Pro (v0.5)
+# TPTC - Transpilador de Código Nativo Pro (v0.6)
 
-Este sistema convierte aplicaciones web (HTML/JS/CSS) en binarios nativos de alto rendimiento.
+Este sistema convierte aplicaciones web (HTML/JS/CSS) en binarios nativos de alto rendimiento integrando un motor real de JavaScript.
 
-## Novedades v0.5
-- **Flexbox Layout:** Motor nativo con soporte para `display: flex` y `flex-direction`.
-- **Soporte de Red:** Nueva API nativa para `fetch()`, permitiendo conectar las apps a internet.
-- **Preparación Android:** Estructura base de proyecto JNI para exportación a APK.
-- **Transpilador v2:** Parser mejorado para manejar divs, botones y lógica de red.
+## Novedades v0.6
+- **Motor JS Integrado:** Soporte para QuickJS, permitiendo ejecutar lógica de JavaScript completa (objetos, arreglos, lógica compleja).
+- **Componentes Interactivos:** Nueva etiqueta `<input>` para entrada de datos del usuario.
+- **Persistencia de Datos (Storage):** API nativa de almacenamiento clave-valor.
+- **Eventos Dinámicos:** Los eventos `onclick` ahora ejecutan scripts de JS reales a través del motor integrado.
 
 ## Componentes
-- `android_project/`: Estructura base para empaquetado móvil.
-- `engine/`: Motor C con soporte Flexbox y Networking.
-- `compiler/`: Transpilador avanzado con soporte para APIs web modernas.
+- `engine/`: Motor C con soporte para QuickJS y Storage nativo.
+- `compiler/`: Transpiler v3 que empaqueta scripts de JS para el motor nativo.
+- `android_project/`: Preparación para exportación a móvil.
 
 ## Uso
 1. Ejecuta `make` para construir el IDE.
-2. Escribe una app con Flexbox y Fetch.
-3. Exporta a Nativo o prepara tu proyecto para Android.
+2. Crea tu app usando todo el poder de JavaScript.
+3. Exporta a nativo y disfruta del rendimiento de C con la flexibilidad de JS.

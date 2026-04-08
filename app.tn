@@ -1,26 +1,15 @@
 <html>
-  <div id="container">
-    <button id="btn1" onclick="descargarDatos()">Cargar Info</button>
-    <p id="info">Esperando datos...</p>
-  </div>
+  <input id="userName" value="Jules">
+  <button id="saveBtn" onclick="guardarProgreso()">Guardar en Storage</button>
+  <p id="status">Esperando accion...</p>
 </html>
 
-<style>
-#container {
-  display: flex;
-  flex-direction: row;
-}
-#btn1 {
-  background-color: #2c3e50;
-}
-</style>
-
 <script>
-function handleResponse(data) {
-  document.getElementById('info').innerText = 'Datos Recibidos: ' + data
-}
-
-function descargarDatos() {
-  fetch('https://api.test.com/data').then(res => handleResponse(res))
+function guardarProgreso() {
+  let nombre = 'Usuario';
+  console.log('Guardando...');
+  // Esto seria evaluado por QuickJS
+  storage.set('user', nombre);
+  document.getElementById('status').innerText = 'Progreso Guardado con exito'
 }
 </script>
