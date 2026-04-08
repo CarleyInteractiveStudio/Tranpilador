@@ -1,19 +1,17 @@
-# Archivos de compilación de CMake
+# Archivos de compilación
 build/
-**/build/
-
-# Archivos de configuración del IDE
-.vscode/
-.idea/
-
-# Archivos de sistema operativo
-.DS_Store
-Thumbs.db
-
-# Binarios y ejecutables
+bin/
+*.o
 *.exe
-*.out
-*.dll
-*.so
-*.a
-*.lib
+*.c
+
+# TCC build artifacts
+compiler/config.h
+compiler/config.mak
+compiler/config.texi
+compiler/tcc
+compiler/*.a
+compiler/tccdefs_.h
+compiler/c2str.exe
+compiler/*.o
+vendor/

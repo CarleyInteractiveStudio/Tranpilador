@@ -1,0 +1,9 @@
+<html>
+<button id="btn1">Click</button>
+<p id="txt1">Original</p>
+</html>
+<script>
+function cambiarTexto() {
+document.getElementById('txt1').innerText = 'Cambiado'
+}
+</script>
