@@ -1,9 +1,10 @@
 <html>
-<button id="btn1">Click</button>
-<p id="txt1">Original</p>
+  <button id="btn1" onclick="cambiarTexto()">Haz click</button>
+  <p id="txt1">Texto original</p>
 </html>
+
 <script>
 function cambiarTexto() {
-document.getElementById('txt1').innerText = 'Cambiado'
+  document.getElementById('txt1').innerText = '¡Texto cambiado!'
 }
 </script>

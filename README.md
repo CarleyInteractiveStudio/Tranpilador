@@ -1,18 +1,24 @@
-# TPTC - Transpilador de Código Nativo Pro
+# TPTC - Transpilador de Código Nativo Pro (v0.2)
 
-Este sistema permite convertir aplicaciones web (JS/HTML/CSS) en binarios nativos de alto rendimiento usando C y Tiny C Compiler (TCC).
+Este sistema convierte aplicaciones web (HTML/JS) en binarios nativos de alto rendimiento.
+
+## Novedades v0.2
+- **Interfaz Gráfica (IDE):** Editor visual basado en Dear ImGui para desarrollo interactivo.
+- **Motor Gráfico OpenGL:** Soporte para renderizado nativo y acelerado.
+- **Transpilador Inteligente:** Ahora soporta eventos `onclick` y una gestión de estados más robusta.
+- **Interacción Real:** El código generado ahora soporta lógica interactiva (JS -> C).
 
 ## Componentes
+- `hub/`: Lanzador de aplicaciones con interfaz gráfica.
+- `editor/`: IDE visual con editor de código y botones de exportación.
+- `engine/`: Motor nativo en C con GC y soporte OpenGL.
+- `compiler/`: Transpilador de `.tn` a `.c`.
 
-- **Hub (`bin/hub_app`):** Gestor de proyectos y configuración.
-- **Editor (`bin/editor_app`):** Entorno de desarrollo con exportación nativa.
-- **Engine (`engine/`):** Motor en C con gestión de memoria (GC) y renderizado.
-- **Transpiler (`bin/tptc`):** Convierte archivos `.tn` (Web) a `.c` (Nativo).
-- **Compiler (`compiler/`):** TCC integrado para compilación instantánea.
+## Requisitos
+- `gcc`, `g++`, `make`
+- Librerías: `glfw`, `OpenGL`
 
-## Uso rápido
-
-1. Ejecuta `make` para construir el sistema.
-2. Crea un archivo `app.tn` con tu código HTML/JS.
-3. Ejecuta `make app.exe` para generar tu aplicación nativa.
-4. Ejecuta `./app.exe` para ver el resultado.
+## Uso
+1. Ejecuta `make` para construir el IDE.
+2. Abre el Hub: `./bin/hub_gui`.
+3. Exporta tu app nativa desde el editor.

@@ -1,9 +1,10 @@
-# Archivos de compilación
-build/
+# Build artifacts
 bin/
 *.o
 *.exe
-*.c
+app.c
+*.log
+*.txt
 
 # TCC build artifacts
 compiler/config.h
@@ -14,4 +15,30 @@ compiler/*.a
 compiler/tccdefs_.h
 compiler/c2str.exe
 compiler/*.o
-vendor/
+
+# Vendor
+vendor/imgui/*
+!vendor/imgui/imconfig.h
+!vendor/imgui/imgui.h
+!vendor/imgui/imgui_internal.h
+!vendor/imgui/imstb_rectpack.h
+!vendor/imgui/imstb_textedit.h
+!vendor/imgui/imstb_truetype.h
+!vendor/imgui/imgui.cpp
+!vendor/imgui/imgui_draw.cpp
+!vendor/imgui/imgui_widgets.cpp
+!vendor/imgui/imgui_tables.cpp
+!vendor/imgui/imgui_demo.cpp
+!vendor/imgui/backends/imgui_impl_glfw.h
+!vendor/imgui/backends/imgui_impl_glfw.cpp
+!vendor/imgui/backends/imgui_impl_opengl3.h
+!vendor/imgui/backends/imgui_impl_opengl3.cpp
+!vendor/imgui/backends/imgui_impl_opengl3_loader.h
+
+vendor/glfw/*
+!vendor/glfw/include/
+!vendor/glfw/src/
+!vendor/glfw/CMakeLists.txt
+
+# System
+.DS_Store
