@@ -1,5 +1,5 @@
 CC=gcc
-TCC=./compiler/tcc
+TCC=tcc
 CFLAGS=-Iengine -D_GNU_SOURCE
 all: bin/tptc bin/engine.o bin/gc.o bin/hub_app bin/editor_app
 bin/tptc: compiler/transpiler.c | bin
