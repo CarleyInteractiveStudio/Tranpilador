@@ -62,5 +62,7 @@ int main() {
         glfwSwapBuffers(window);
     }
     glfwTerminate();
+    printf("\nTPTC HUB finalizado. Presione una tecla para cerrar...");
+    getchar();
     return 0;
 }
