@@ -2,42 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-void download_from_github(const char* url, const char* dest) {
-    char cmd[512];
-    printf("[Downloader] Cloning from GitHub: %s\n", url);
-    sprintf(cmd, "git clone --depth 1 %s %s", url, dest);
-    system(cmd);
-}
-
-void download_from_drive(const char* url, const char* dest) {
-    printf("[Downloader] Handling Google Drive link...\n");
-    // Lógica para extraer ID y usar curl para descargar el zip
-    char cmd[512];
-    sprintf(cmd, "curl -L -o %s/project.zip '%s'", dest, url);
-    system(cmd);
-}
-
-void download_generic(const char* url, const char* dest) {
-    char cmd[512];
-    printf("[Downloader] Downloading from URL: %s\n", url);
-    sprintf(cmd, "mkdir -p %s && curl -L -o %s/index.html %s", dest, dest, url);
-    system(cmd);
+void sanitize(char* str) {
+    for (int i = 0; str[i]; i++) {
+        if (str[i] == ';' || str[i] == '&' || str[i] == '|' || str[i] == '`' || str[i] == '$') str[i] = '_';
+    }
 }
 
 int main(int argc, char** argv) {
-    if (argc < 3) {
-        printf("Uso: %s <url> <dest_folder>\n", argv[0]);
-        return 1;
-    }
-    const char* url = argv[1];
-    const char* dest = argv[2];
+    if (argc < 3) return 1;
+    char url[512], dest[256], cmd[1024];
+    strncpy(url, argv[1], 511);
+    strncpy(dest, argv[2], 255);
+    sanitize(url); sanitize(dest);
 
     if (strstr(url, "github.com")) {
-        download_from_github(url, dest);
-    } else if (strstr(url, "drive.google.com")) {
-        download_from_drive(url, dest);
+        sprintf(cmd, "git clone --depth 1 https://github.com/%s %s", strstr(url, "github.com") + 11, dest);
     } else {
-        download_generic(url, dest);
+        sprintf(cmd, "mkdir -p %s && curl -L %s -o %s/index.html", dest, url, dest);
     }
-    return 0;
+    printf("[Downloader] Ejecutando: %s\n", cmd);
+    return system(cmd);
 }

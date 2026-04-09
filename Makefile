@@ -1,10 +1,11 @@
 CC=gcc
 CXX=g++
+TPTC_CC=./bin/tptc_cc
 CFLAGS=-Iengine -D_GNU_SOURCE
 CXXFLAGS=-Ivendor/imgui -Ivendor/imgui/backends -Ivendor/glfw/include -D_GNU_SOURCE
 LIBS=-lGL -lglfw -lX11 -lpthread -ldl
 
-all: bin/downloader bin/tptc_pro bin/engine.o bin/gc.o bin/js_runtime.o bin/hub_gui bin/editor_gui
+all: bin/downloader bin/tptc_pro bin/engine.o bin/gc.o bin/js_runtime.o
 
 bin/downloader: engine/downloader.c | bin
 	$(CC) engine/downloader.c -o bin/downloader $(CFLAGS)
@@ -21,16 +22,12 @@ bin/gc.o: engine/gc.c | bin
 bin/js_runtime.o: engine/js_runtime.c | bin
 	$(CC) -c engine/js_runtime.c -o bin/js_runtime.o $(CFLAGS)
 
-# Para compilar los GUIs en el sandbox sin dependencias reales, solo chequeamos sintaxis
-# En un sistema real esto compilaria con ImGui
-bin/hub_gui: hub/main.cpp | bin
-	$(CXX) -c hub/main.cpp -o bin/hub_gui.o $(CXXFLAGS)
-
-bin/editor_gui: editor/gui.cpp | bin
-	$(CXX) -c editor/gui.cpp -o bin/editor_gui.o $(CXXFLAGS)
+# REGLA MAESTRA: Usar TPTC_CC para compilar las aplicaciones finales
+%.exe: %.c bin/engine.o bin/gc.o bin/js_runtime.o
+	$(TPTC_CC) -Icompiler/include -Iengine $< bin/engine.o bin/gc.o bin/js_runtime.o -Lbin -o $@
 
 bin:
 	mkdir -p bin
 
 clean:
-	rm -rf bin/* *.o result/
+	rm -rf bin/*.o bin/downloader bin/tptc_pro *.o *.c result/

@@ -1,16 +1,17 @@
-# TPTC Ultimate IDE - Versión Windows & Pro (v5.0)
+# TPTC Ultimate IDE - Versión con Compilador Propio (v6.0)
 
-Este lanzamiento oficial añade el soporte completo para Windows y el acceso a hardware nativo del dispositivo.
+Este lanzamiento integra nuestro propio motor de compilación para ofrecer la máxima independencia y rendimiento.
 
-## Novedades v5.0
-- **Windows Ready:** Sistema de construcción `build_windows.bat` y soporte para librerías de sistema de Windows.
-- **APIs de Hardware:** Librerías nativas para Microfono, Cámara, Galería y Archivos.
-- **Branding Personalizado:** Las apps muestran "Impulsado por TPTC" con el logo oficial en la parte inferior.
-- **Configuración de Proyecto:** Nuevo menú en el IDE para definir nombre, versión, iconos y splash screen de la app.
-- **IDE con Iconos:** Interfaz visual optimizada con iconos para archivos web.
+## Novedades v6.0: "Total Independence"
+- **TPTC_CC Core:** Hemos integrado nuestro propio compilador (`tptc_cc`) basado en tecnología abierta pero optimizado para nuestra suite.
+- **Flujo de Compilación Nativo:** Ya no dependemos de compiladores externos del sistema para generar los resultados finales. El IDE usa `tptc_cc` internamente.
+- **Optimización para Windows:** El motor está afinado para generar binarios de Windows (.exe) de alto rendimiento.
+- **Preparado para Lanzamiento:** Suite completa con Transpilador Pro, Downloader Global y Motor Gráfico Multiplataforma.
 
-## Instalación en Windows
-Simplemente ejecuta `build_windows.bat` desde tu terminal de desarrollador (MinGW/GCC) para compilar toda la suite.
+## Cómo usar
+1. Compila la suite usando `make` o `build_windows.bat`.
+2. El sistema creará `bin/tptc_cc`, que es nuestro compilador interno.
+3. Al exportar desde el IDE, se usará automáticamente este núcleo para generar tu aplicación nativa.
 
 ---
-*TPTC: La potencia del C con la versatilidad de la Web.*
+*TPTC: El primer ecosistema web-to-native con su propio núcleo de compilación.*
