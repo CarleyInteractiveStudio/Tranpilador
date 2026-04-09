@@ -27,7 +27,8 @@ int main() {
 
         if (ImGui::Button("CREAR PROYECTO", ImVec2(200, 60))) {
             // Logica para crear carpeta y archivos base
-            system("mkdir -p proy1 && touch proy1/index.html proy1/styles.css proy1/main.js");
+            system("mkdir -p MiProyectoNativo && printf '<html><body><h1>Hola</h1></body></html>' > MiProyectoNativo/index.html");
+            system("touch MiProyectoNativo/styles.css MiProyectoNativo/main.js");
         }
         ImGui::SameLine();
         if (ImGui::Button("IMPORTAR PROYECTO", ImVec2(200, 60))) {

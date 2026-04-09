@@ -1,17 +1,18 @@
-# TPTC Ultimate IDE - Versión con Compilador Propio (v6.0)
+# TPTC Professional Native IDE (Versión Final v6.0)
 
-Este lanzamiento integra nuestro propio motor de compilación para ofrecer la máxima independencia y rendimiento.
+Este es el lanzamiento definitivo de la suite para convertir sitios web en aplicaciones nativas gráficas de alto rendimiento.
 
-## Novedades v6.0: "Total Independence"
-- **TPTC_CC Core:** Hemos integrado nuestro propio compilador (`tptc_cc`) basado en tecnología abierta pero optimizado para nuestra suite.
-- **Flujo de Compilación Nativo:** Ya no dependemos de compiladores externos del sistema para generar los resultados finales. El IDE usa `tptc_cc` internamente.
-- **Optimización para Windows:** El motor está afinado para generar binarios de Windows (.exe) de alto rendimiento.
-- **Preparado para Lanzamiento:** Suite completa con Transpilador Pro, Downloader Global y Motor Gráfico Multiplataforma.
+## Características Maestras
+- **True Native GUI:** Las aplicaciones exportadas son ventanas reales (.exe), sin terminales negras.
+- **IDE Visual Pro:** Interfaz inspirada en VS Code con explorador de archivos, iconos y vista previa interactiva.
+- **Compilador Independiente:** Usa el núcleo `tptc_cc` integrado para una exportación instantánea y privada.
+- **Multiplataforma:** Soporte para Windows, Linux, Android e iOS.
+- **Hardware Ready:** Acceso nativo a cámara, micro y archivos del dispositivo.
 
-## Cómo usar
-1. Compila la suite usando `make` o `build_windows.bat`.
-2. El sistema creará `bin/tptc_cc`, que es nuestro compilador interno.
-3. Al exportar desde el IDE, se usará automáticamente este núcleo para generar tu aplicación nativa.
+## Cómo empezar
+1. Compila la suite con `make` o `build_windows.bat`.
+2. Inicia el HUB: `bin\hub_gui.exe`.
+3. Crea un proyecto, escribe tu HTML/CSS/JS y pulsa "EJECUTAR APP NATIVA" para ver tu creación en una ventana real.
 
 ---
-*TPTC: El primer ecosistema web-to-native con su propio núcleo de compilación.*
+*TPTC: Transpila la Web, Ejecuta el Hardware.*

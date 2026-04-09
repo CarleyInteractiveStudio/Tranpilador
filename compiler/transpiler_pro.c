@@ -26,8 +26,10 @@ void transpile_pro(const char* proj_dir) {
     fprintf(out, "#include \"engine.h\"\n#include \"js_runtime.h\"\n#include \"gc.h\"\n#include \"hardware_api.h\"\n\n");
     fprintf(out, "Window* win;\n\n");
     fprintf(out, "// Aplicacion Unificada Generada por TPTC v6.0\n");
-    fprintf(out, "int main() {\n    engine_init();\n    win = window_create(1280, 720, \"TPTC App Ready\");\n");
-    fprintf(out, "    // El motor ahora renderiza el arbol DOM escaneado de %s\n", clean_dir);
+    // Definimos el punto de entrada para aplicaciones de ventana en Windows si es necesario
+    fprintf(out, "#ifdef _WIN32\n#include <windows.h>\nint APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrev, PSTR cmd, int nShow) {\n#else\nint main() {\n#endif\n");
+    fprintf(out, "    engine_init();\n    win = window_create(1280, 720, \"TPTC Native App - v6.0\");\n");
+    fprintf(out, "    // Renderizado del sitio web: %s\n", clean_dir);
     fprintf(out, "    engine_run(win);\n    engine_terminate();\n    return 0;\n}\n");
     fclose(out);
 
@@ -35,7 +37,7 @@ void transpile_pro(const char* proj_dir) {
     system("mkdir -p result/executables");
 
     char cmd[1024];
-    sprintf(cmd, "./bin/tptc_cc -Icompiler/include -Iengine result/generated_app.c bin/engine.o bin/gc.o bin/js_runtime.o -o result/executables/app.exe");
+    sprintf(cmd, "./bin/tptc_cc -Icompiler/include -Iengine result/generated_app.c bin/engine.o bin/gc.o bin/js_runtime.o -Lbin -lopengl32 -lgdi32 -luser32 -o result/executables/app.exe");
     system(cmd);
 }
 

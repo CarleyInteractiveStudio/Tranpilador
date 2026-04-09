@@ -81,9 +81,12 @@ int main() {
         ImGui::Text("EDITOR");
         ImGui::InputTextMultiline("##editor", html_code, sizeof(html_code), ImVec2(-FLT_MIN, -FLT_MIN));
         ImGui::NextColumn();
-        ImGui::Text("VISTA PREVIA");
+        ImGui::Text("VISTA PREVIA NATIVA");
+        if (ImGui::Button("EJECUTAR APP NATIVA")) {
+            system("./bin/tptc_pro . && ./result/executables/app.exe &");
+        }
         ImGui::BeginChild("Render", ImVec2(0,0), true);
-        ImGui::Button("Boton Nativo Test");
+        ImGui::Text("Pulse arriba para ejecutar la app nativa compilada.");
         ImGui::EndChild();
         ImGui::End();
 
