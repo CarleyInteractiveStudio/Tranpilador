@@ -4,10 +4,9 @@
 #include <stdio.h>
 #include <GLFW/glfw3.h>
 
-int main(int, char**) {
+int main() {
     if (!glfwInit()) return 1;
-    GLFWwindow* window = glfwCreateWindow(640, 480, "TPTC HUB", NULL, NULL);
-    if (!window) return 1;
+    GLFWwindow* window = glfwCreateWindow(800, 600, "TPTC HUB", NULL, NULL);
     glfwMakeContextCurrent(window);
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -22,11 +21,39 @@ int main(int, char**) {
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
         ImGui::Begin("HUB", NULL, ImGuiWindowFlags_NoTitleBar);
-        ImGui::Text("TPTC HUB - Gestion de Proyectos");
-        if (ImGui::Button("Abrir TPTC Editor", ImVec2(200, 50))) {
+
+        ImGui::Text("TPTC - Hub de Proyectos");
+        ImGui::Separator();
+
+        if (ImGui::Button("CREAR PROYECTO", ImVec2(200, 60))) {
+            // Logica para crear carpeta y archivos base
+            system("mkdir -p proy1 && touch proy1/index.html proy1/styles.css proy1/main.js");
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("IMPORTAR PROYECTO", ImVec2(200, 60))) {
+            ImGui::OpenPopup("ImportFromURL");
+        }
+
+        if (ImGui::BeginPopupModal("ImportFromURL", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+            static char url_buf[512] = "";
+            ImGui::Text("Pegue el enlace (GitHub, Drive o URL):");
+            ImGui::InputText("##url", url_buf, sizeof(url_buf));
+            if (ImGui::Button("DESCARGAR Y CONVERTIR", ImVec2(200, 40))) {
+                char cmd[1024];
+                sprintf(cmd, "./bin/downloader '%s' ./imported_project", url_buf);
+                system(cmd);
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Cancelar")) ImGui::CloseCurrentPopup();
+            ImGui::EndPopup();
+        }
+
+        ImGui::Text("\nProyectos Recientes:");
+        if (ImGui::Selectable("Mi Gran App Nativa", false, 0, ImVec2(0, 30))) {
             system("./bin/editor_gui &");
         }
-        if (ImGui::Button("Salir", ImVec2(200, 50))) glfwSetWindowShouldClose(window, true);
+
         ImGui::End();
 
         ImGui::Render();
