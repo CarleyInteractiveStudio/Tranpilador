@@ -6,37 +6,22 @@
 #include <string>
 #include <vector>
 
-// Mock de iconos
-#define ICON_FILE "[F]"
-#define ICON_FOLDER "[D]"
-#define ICON_GEAR "[*]"
-
-struct Theme {
-    ImVec4 bg;
-    ImVec4 text;
-    ImVec4 accent;
-};
-
-Theme dark_theme = { ImVec4(0.1f, 0.1f, 0.1f, 1.0f), ImVec4(0.9f, 0.9f, 0.9f, 1.0f), ImVec4(0.2f, 0.5f, 0.8f, 1.0f) };
-
-void apply_style(Theme t) {
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.Colors[ImGuiCol_WindowBg] = t.bg;
-    style.Colors[ImGuiCol_Text] = t.text;
-    style.Colors[ImGuiCol_Button] = t.accent;
-}
+// Iconos estilizados para el lanzamiento
+#define ICON_HTML "<H>"
+#define ICON_CSS  "{#}"
+#define ICON_JS   "(J)"
+#define ICON_IMG  "[I]"
+#define ICON_FOLDER " > "
 
 int main() {
     if (!glfwInit()) return 1;
-    GLFWwindow* window = glfwCreateWindow(1600, 900, "TPTC Professional IDE", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1600, 900, "TPTC ULTIMATE IDE", NULL, NULL);
     glfwMakeContextCurrent(window);
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    char html_buffer[8192] = "<!-- HTML Source -->\n<div id='app'>\n  <h1>Hola Nativo</h1>\n</div>";
-    char css_buffer[4096] = "/* CSS Styles */\n#app { background-color: #222; }";
-    char js_buffer[8192] = "// JS Logic\nconsole.log('App ready');";
+    char html_code[8192] = "<html>\n  <body>\n    <h1>Lanzamiento TPTC</h1>\n  </body>\n</html>";
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -44,107 +29,43 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // BARRA SUPERIOR
+        // Barra Superior
         if (ImGui::BeginMainMenuBar()) {
-            if (ImGui::BeginMenu("Archivos")) {
-                if (ImGui::BeginMenu("Nuevo Archivo")) {
-                    if (ImGui::MenuItem("JavaScript (.js)")) {}
-                    if (ImGui::MenuItem("HTML (.html)")) {}
-                    if (ImGui::MenuItem("CSS (.css)")) {}
-                    ImGui::EndMenu();
-                }
-                if (ImGui::MenuItem("Importar Archivo (Imagen/SVG)")) {}
-                if (ImGui::MenuItem("Importar Proyecto (Carpeta)")) {}
-                ImGui::Separator();
-                if (ImGui::MenuItem("Abrir Nuevo Proyecto")) {}
-                if (ImGui::MenuItem("Cerrar Proyecto")) {}
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Editar")) {
-                if (ImGui::BeginMenu("Configurar Tema")) {
-                    if (ImGui::MenuItem("Tema Oscuro")) { apply_style(dark_theme); }
-                    if (ImGui::MenuItem("Tema Claro")) {}
-                    if (ImGui::MenuItem("Personalizar Colores")) {}
-                    ImGui::EndMenu();
-                }
-                ImGui::EndMenu();
-            }
-            ImGui::SetCursorPosX(ImGui::GetWindowWidth() - 150);
+            if (ImGui::BeginMenu("Archivos")) { ImGui::EndMenu(); }
             if (ImGui::BeginMenu("Exportar")) {
-                ImGui::TextDisabled("Paso 1:");
-                if (ImGui::MenuItem("Compilar a C Nativo")) {}
-                ImGui::Separator();
-                ImGui::TextDisabled("Paso 2 (Exportar):");
-                if (ImGui::MenuItem("Windows (.exe)")) {}
-                if (ImGui::MenuItem("Android (.apk)")) {}
-                if (ImGui::MenuItem("iOS (.ipa)")) {}
-                if (ImGui::MenuItem("Linux (.bin)")) {}
+                if (ImGui::MenuItem("Paso 1: Compilar Proyecto")) {}
+                if (ImGui::MenuItem("Paso 2: Generar APK/EXE")) {}
                 ImGui::EndMenu();
             }
             ImGui::EndMainMenuBar();
         }
 
-        // SIDEBAR IZQUIERDA
+        // Sidebar con Iconos
         ImGui::SetNextWindowPos(ImVec2(0, 20));
         ImGui::SetNextWindowSize(ImVec2(300, ImGui::GetIO().DisplaySize.y - 20));
-        ImGui::Begin("Sidebar", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-
-        if (ImGui::CollapsingHeader(ICON_GEAR " Extensiones")) {
-            ImGui::Text("TCC Native Compiler [v1.0]");
-            ImGui::Text("HTML5 Parser [Lexbor]");
-        }
-
-        if (ImGui::CollapsingHeader(ICON_FOLDER " Archivos del Proyecto")) {
-            if (ImGui::TreeNode("Archivos")) {
-                ImGui::Text(ICON_FILE " index.html");
-                ImGui::Text(ICON_FILE " styles.css");
-                ImGui::Text(ICON_FILE " main.js");
-                ImGui::TreePop();
-            }
-            if (ImGui::TreeNode("Resultado")) {
-                if (ImGui::TreeNode("Codigos C")) {
-                    ImGui::Text(ICON_FILE " generated_app.c");
-                    ImGui::TreePop();
-                }
-                if (ImGui::TreeNode("Ejecutables")) {
-                    ImGui::Text(ICON_FILE " app.exe");
-                    ImGui::TreePop();
-                }
-                ImGui::TreePop();
-            }
-        }
-        ImGui::End();
-
-        // EDITOR CENTRAL
-        ImGui::SetNextWindowPos(ImVec2(300, 20));
-        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x / 2 - 150, ImGui::GetIO().DisplaySize.y - 20));
-        ImGui::Begin("Editor", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-        if (ImGui::BeginTabBar("EditorTabs")) {
-            if (ImGui::BeginTabItem("index.html")) {
-                ImGui::InputTextMultiline("##html", html_buffer, sizeof(html_buffer), ImVec2(-FLT_MIN, -FLT_MIN));
-                ImGui::EndTabItem();
-            }
-            if (ImGui::BeginTabItem("styles.css")) {
-                ImGui::InputTextMultiline("##css", css_buffer, sizeof(css_buffer), ImVec2(-FLT_MIN, -FLT_MIN));
-                ImGui::EndTabItem();
-            }
-            if (ImGui::BeginTabItem("main.js")) {
-                ImGui::InputTextMultiline("##js", js_buffer, sizeof(js_buffer), ImVec2(-FLT_MIN, -FLT_MIN));
-                ImGui::EndTabItem();
-            }
-            ImGui::EndTabBar();
-        }
-        ImGui::End();
-
-        // PREVIEW DERECHA
-        ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x / 2 + 150, 20));
-        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x / 2 - 150, ImGui::GetIO().DisplaySize.y - 20));
-        ImGui::Begin("Live Preview", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-        ImGui::TextColored(ImVec4(0, 1, 0, 1), "VISTA PREVIA EN TIEMPO REAL");
+        ImGui::Begin("Filesystem", NULL, ImGuiWindowFlags_NoTitleBar);
+        ImGui::TextColored(ImVec4(1,1,0,1), "EXPLORADOR PRO");
         ImGui::Separator();
-        ImGui::BeginChild("PreviewContent", ImVec2(0, 0), true);
-        ImGui::Text("Simulando Renderizado Nativo...");
-        ImGui::Button("Boton desde HTML");
+        if (ImGui::TreeNodeEx("Mi Proyecto", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::TextColored(ImVec4(1,0.5f,0,1), ICON_HTML " index.html");
+            ImGui::TextColored(ImVec4(0,0.5f,1,1), ICON_CSS  " styles.css");
+            ImGui::TextColored(ImVec4(1,1,0,1), ICON_JS   " main.js");
+            ImGui::TextColored(ImVec4(0,1,0,1), ICON_IMG  " logo.png");
+            ImGui::TreePop();
+        }
+        ImGui::End();
+
+        // Editor y Preview (Simplificado para el renderizado final)
+        ImGui::SetNextWindowPos(ImVec2(300, 20));
+        ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x - 300, ImGui::GetIO().DisplaySize.y - 20));
+        ImGui::Begin("MainView", NULL, ImGuiWindowFlags_NoTitleBar);
+        ImGui::Columns(2);
+        ImGui::Text("EDITOR");
+        ImGui::InputTextMultiline("##editor", html_code, sizeof(html_code), ImVec2(-FLT_MIN, -FLT_MIN));
+        ImGui::NextColumn();
+        ImGui::Text("VISTA PREVIA");
+        ImGui::BeginChild("Render", ImVec2(0,0), true);
+        ImGui::Button("Boton Nativo Test");
         ImGui::EndChild();
         ImGui::End();
 
@@ -153,10 +74,6 @@ int main() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
-
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
     glfwTerminate();
     return 0;
 }
