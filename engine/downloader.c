@@ -9,7 +9,12 @@ void sanitize(char* str) {
 }
 
 int main(int argc, char** argv) {
-    if (argc < 3) return 1;
+    if (argc < 3) {
+        printf("ERROR: Argumentos insuficientes.\nUso: downloader <url> <carpeta_destino>\n");
+        printf("\nPresione una tecla para cerrar...");
+        getchar();
+        return 1;
+    }
     char url[512], dest[256], cmd[1024];
     strncpy(url, argv[1], 511);
     strncpy(dest, argv[2], 255);

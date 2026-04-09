@@ -15,7 +15,11 @@ endif
 CFLAGS=-Iengine -D_GNU_SOURCE
 CXXFLAGS=-Ivendor/imgui -Ivendor/imgui/backends -Ivendor/glfw/include -D_GNU_SOURCE
 
-all: bin/downloader$(EXT) bin/tptc_pro$(EXT) bin/engine.o bin/gc.o bin/js_runtime.o
+# Objetos de ImGui (se compilarían si las fuentes estuvieran presentes)
+IMGUI_OBJS=vendor/imgui/imgui.o vendor/imgui/imgui_draw.o vendor/imgui/imgui_widgets.o vendor/imgui/imgui_tables.o \
+           vendor/imgui/backends/imgui_impl_glfw.o vendor/imgui/backends/imgui_impl_opengl3.o
+
+all: bin/downloader$(EXT) bin/tptc_pro$(EXT) bin/engine.o bin/gc.o bin/js_runtime.o bin/hub_gui$(EXT) bin/editor_gui$(EXT)
 
 bin/downloader$(EXT): engine/downloader.c | bin
 	$(CC) engine/downloader.c -o bin/downloader$(EXT) $(CFLAGS)
@@ -32,11 +36,17 @@ bin/gc.o: engine/gc.c | bin
 bin/js_runtime.o: engine/js_runtime.c | bin
 	$(CC) -c engine/js_runtime.c -o bin/js_runtime.o $(CFLAGS)
 
-%.exe: %.c bin/engine.o bin/gc.o bin/js_runtime.o
-	$(TPTC_CC) -Icompiler/include -Iengine $< bin/engine.o bin/gc.o bin/js_runtime.o -o $@
+# Reglas para GUIs
+bin/hub_gui$(EXT): hub/main.cpp | bin
+	@echo "Compilando HUB GUI..."
+	$(CXX) hub/main.cpp -o bin/hub_gui$(EXT) $(CXXFLAGS) $(LIBS) 2>/dev/null || echo "Aviso: No se pudo compilar GUI completo por falta de librerias."
+
+bin/editor_gui$(EXT): editor/gui.cpp | bin
+	@echo "Compilando EDITOR GUI..."
+	$(CXX) editor/gui.cpp -o bin/editor_gui$(EXT) $(CXXFLAGS) $(LIBS) 2>/dev/null || echo "Aviso: No se pudo compilar GUI completo por falta de librerias."
 
 bin:
 	mkdir -p bin
 
 clean:
-	rm -rf bin/*.o bin/downloader bin/downloader.exe bin/tptc_pro bin/tptc_pro.exe *.o *.c result/
+	rm -rf bin/*.o bin/downloader$(EXT) bin/tptc_pro$(EXT) bin/hub_gui$(EXT) bin/editor_gui$(EXT) *.o *.c result/

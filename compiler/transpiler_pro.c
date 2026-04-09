@@ -40,7 +40,12 @@ void transpile_pro(const char* proj_dir) {
 }
 
 int main(int argc, char** argv) {
-    if (argc < 2) return 1;
+    if (argc < 2) {
+        printf("ERROR: No se especifico directorio de proyecto.\nUso: tptc_pro <directorio>\n");
+        printf("\nPresione una tecla para cerrar...");
+        getchar();
+        return 1;
+    }
     transpile_pro(argv[1]);
     return 0;
 }
