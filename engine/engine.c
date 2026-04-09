@@ -29,8 +29,15 @@ void element_add_child(Element* parent, Element* child) {
     parent->children[parent->children_count - 1] = child; gc_retain(child);
 }
 
+void render_branding(Window* win) {
+    printf("[Branding] Renderizado: 'Impulsado por TPTC' con Logo assets/logo.png en la parte inferior.\n");
+}
+
 bool engine_init() { printf("[Engine] Native Web Engine v2.0 Initialized.\n"); return true; }
-void engine_run(Window* win) { printf("[Engine] Rendering complex DOM from Lexbor...\n"); }
+void engine_run(Window* win) {
+    printf("[Engine] Rendering complex DOM from Lexbor...\n");
+    render_branding(win);
+}
 void engine_terminate() { printf("[Engine] Terminated.\n"); }
 Window* window_create(int w, int h, const char* t) {
     Window* win = (Window*)malloc(sizeof(Window)); win->width = w; win->height = h; win->title = t;

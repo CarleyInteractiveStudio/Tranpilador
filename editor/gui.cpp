@@ -37,8 +37,26 @@ int main() {
                 if (ImGui::MenuItem("Paso 2: Generar APK/EXE")) {}
                 ImGui::EndMenu();
             }
+                if (ImGui::MenuItem("Configuracion de Proyecto")) {
+                    ImGui::OpenPopup("ProjectSettings");
+                }
             ImGui::EndMainMenuBar();
         }
+
+            if (ImGui::BeginPopupModal("ProjectSettings", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+                static char app_name[128] = "Mi App Nativa";
+                static char app_version[32] = "1.0.0";
+                static char store_id[128] = "com.tptc.myapp";
+                ImGui::InputText("Nombre de la App", app_name, sizeof(app_name));
+                ImGui::InputText("Version", app_version, sizeof(app_version));
+                ImGui::InputText("Store ID", store_id, sizeof(store_id));
+                ImGui::Separator();
+                ImGui::Text("Assets:");
+                if (ImGui::Button("Asignar Icono (.png/.ico)")) {}
+                if (ImGui::Button("Asignar Splash Screen (SVG/PNG)")) {}
+                if (ImGui::Button("Cerrar")) ImGui::CloseCurrentPopup();
+                ImGui::EndPopup();
+            }
 
         // Sidebar con Iconos
         ImGui::SetNextWindowPos(ImVec2(0, 20));

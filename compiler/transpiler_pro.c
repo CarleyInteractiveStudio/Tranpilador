@@ -15,7 +15,7 @@ void transpile_pro(const char* proj_dir) {
     FILE* out = fopen("result/generated_app.c", "w");
     if (!out) { system("mkdir -p result"); out = fopen("result/generated_app.c", "w"); }
 
-    fprintf(out, "#include \"engine.h\"\n#include \"js_runtime.h\"\n#include \"gc.h\"\n\n");
+    fprintf(out, "#include \"engine.h\"\n#include \"js_runtime.h\"\n#include \"gc.h\"\n#include \"hardware_api.h\"\n\n");
     fprintf(out, "int main() {\n    engine_init();\n    Window* win = window_create(1280, 720, \"TPTC Exported App\");\n");
     fprintf(out, "    // Logic from index.html, styles.css and main.js integrated here\n");
     fprintf(out, "    engine_run(win);\n    engine_terminate();\n    return 0;\n}\n");
